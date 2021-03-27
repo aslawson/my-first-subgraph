@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Attestations
@@ -25,7 +25,7 @@ dataSources:
         - OwnershipTransferred
       abis:
         - name: Attestations
-          file: ./abis/Attestations.json
+          file: Attestations/abis/Attestations.json
       eventHandlers:
         - event: AttestationsRequested(indexed bytes32,indexed address,uint256,address)
           handler: handleAttestationsRequested
@@ -47,4 +47,4 @@ dataSources:
           handler: handleRegistrySet
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
-      file: ./src/mapping.ts
+      file: Attestations/Attestations.wasm

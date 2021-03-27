@@ -4,10 +4,11 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ amyslawson/my-first-subgraph",
-    "create-local": "graph create --node http://localhost:8020/ amyslawson/my-first-subgraph",
-    "remove-local": "graph remove --node http://localhost:8020/ amyslawson/my-first-subgraph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 amyslawson/my-first-subgraph"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ aslawson/my-first-subgraph",
+    "create-local": "graph create --node http://localhost:8020/ aslawson/my-first-subgraph",
+    "remove-local": "graph remove --node http://localhost:8020/ aslawson/my-first-subgraph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 aslawson/my-first-subgraph",
+    "deploy-staging": "graph deploy --access-token '<access-token>' --verbosity debug --node https://api.staging.thegraph.com/deploy/ --ipfs https://api.staging.thegraph.com/ipfs/ aslawson/my-first-subgraph subgraph.yaml"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",
