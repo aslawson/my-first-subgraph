@@ -1,0 +1,50 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Attestations
+    network: mainnet
+    source:
+      address: "0xdC553892cdeeeD9f575aa0FBA099e5847fd88D20"
+      abi: Attestations
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - AttestationsRequested
+        - AttestationIssuerSelected
+        - AttestationCompleted
+        - Withdrawal
+        - AttestationExpiryBlocksSet
+        - AttestationRequestFeeSet
+        - SelectIssuersWaitBlocksSet
+        - MaxAttestationsSet
+        - RegistrySet
+        - OwnershipTransferred
+      abis:
+        - name: Attestations
+          file: ./abis/Attestations.json
+      eventHandlers:
+        - event: AttestationsRequested(indexed bytes32,indexed address,uint256,address)
+          handler: handleAttestationsRequested
+        - event: AttestationIssuerSelected(indexed bytes32,indexed address,indexed address,address)
+          handler: handleAttestationIssuerSelected
+        - event: AttestationCompleted(indexed bytes32,indexed address,indexed address)
+          handler: handleAttestationCompleted
+        - event: Withdrawal(indexed address,indexed address,uint256)
+          handler: handleWithdrawal
+        - event: AttestationExpiryBlocksSet(uint256)
+          handler: handleAttestationExpiryBlocksSet
+        - event: AttestationRequestFeeSet(indexed address,uint256)
+          handler: handleAttestationRequestFeeSet
+        - event: SelectIssuersWaitBlocksSet(uint256)
+          handler: handleSelectIssuersWaitBlocksSet
+        - event: MaxAttestationsSet(uint256)
+          handler: handleMaxAttestationsSet
+        - event: RegistrySet(indexed address)
+          handler: handleRegistrySet
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/mapping.ts
