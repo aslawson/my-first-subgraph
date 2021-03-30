@@ -8,7 +8,7 @@
     "create-local": "graph create --node http://localhost:8020/ aslawson/my-first-subgraph",
     "remove-local": "graph remove --node http://localhost:8020/ aslawson/my-first-subgraph",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 aslawson/my-first-subgraph",
-    "deploy-staging": "graph deploy --access-token '<access-token>' --verbosity debug --node https://api.staging.thegraph.com/deploy/ --ipfs https://api.staging.thegraph.com/ipfs/ aslawson/my-first-subgraph subgraph.yaml"
+    "deploy-staging": "graph deploy --access-token '<KEY>' --verbosity debug --node https://api.staging.thegraph.com/deploy/ --ipfs https://api.staging.thegraph.com/ipfs/ aslawson/attestations-subgraph-2 subgraph.yaml"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",

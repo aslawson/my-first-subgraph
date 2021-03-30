@@ -12,26 +12,27 @@ import {
   RegistrySet,
   OwnershipTransferred
 } from "../generated/Attestations/Attestations"
-import { ExampleEntity } from "../generated/schema"
+import { Attestation } from "../generated/schema"
 
 export function handleAttestationsRequested(
   event: AttestationsRequested
 ): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
+  let entity = Attestation.load(event.transaction.from.toHex())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (entity == null) {
-    entity = new ExampleEntity(event.transaction.from.toHex())
+    entity = new Attestation(event.transaction.from.toHex())
 
     // Entity fields can be set using simple assignments
-    entity.count = BigInt.fromI32(0)
+    entity.requestCount = BigInt.fromI32(0)
+    entity.completeCount = BigInt.fromI32(0)
   }
 
   // BigInt and BigDecimal math are supported
-  entity.count = entity.count + BigInt.fromI32(1)
+  entity.requestCount = entity.requestCount + event.params.attestationsRequested
 
   // Entity fields can be set based on event parameters
   entity.identifier = event.params.identifier
@@ -95,7 +96,29 @@ export function handleAttestationIssuerSelected(
   event: AttestationIssuerSelected
 ): void {}
 
-export function handleAttestationCompleted(event: AttestationCompleted): void {}
+export function handleAttestationCompleted(event: AttestationCompleted): void {
+  let entity = Attestation.load(event.transaction.from.toHex())
+
+  // Entities only exist after they have been saved to the store;
+  // `null` checks allow to create entities on demand
+  if (entity == null) {
+    entity = new Attestation(event.transaction.from.toHex())
+
+    // Entity fields can be set using simple assignments
+    entity.completeCount = BigInt.fromI32(0)
+    entity.requestCount = BigInt.fromI32(0)
+  }
+
+  // BigInt and BigDecimal math are supported
+  entity.completeCount = entity.completeCount + BigInt.fromI32(1)
+
+  // Entity fields can be set based on event parameters
+  entity.identifier = event.params.identifier
+  entity.account = event.params.account
+
+  // Entities can be written to the store with `.save()`
+  entity.save()
+}
 
 export function handleWithdrawal(event: Withdrawal): void {}
 

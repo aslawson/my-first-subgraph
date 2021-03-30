@@ -1,6 +1,7 @@
-type ExampleEntity @entity {
+type Attestation @entity {
   id: ID!
-  count: BigInt!
+  requestCount: BigInt
   identifier: Bytes! # bytes32
   account: Bytes! # address
+  completeCount: BigInt
 }
